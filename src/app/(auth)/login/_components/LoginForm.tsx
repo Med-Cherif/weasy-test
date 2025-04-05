@@ -100,7 +100,7 @@ const LoginForm = () => {
               <Button isLoading={mutation.isPending}>Login</Button>
 
               <p className="text-center">
-                You don't have account ?{" "}
+                {"You don't have account ? "}
                 <span className="underline cursor-pointer">Sign up</span>
               </p>
 
