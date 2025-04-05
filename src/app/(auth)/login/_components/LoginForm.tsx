@@ -16,11 +16,15 @@ import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LoginFieldValues, loginSchema } from "@/schemas/login-schema";
-import Link from "next/link";
 import { useLoginMutation } from "@/apis/auth/auth-apis";
 import { extractResponseError } from "@/utils/error-utils";
+import { useRouter } from "next/navigation";
+import pathnames from "@/constants/pathnames";
+import InputPassword from "@/components/form/input-password/InputPassword";
 
 const LoginForm = () => {
+  const router = useRouter();
+
   const mutation = useLoginMutation();
 
   const error = extractResponseError(mutation.error);
@@ -28,22 +32,26 @@ const LoginForm = () => {
   const form = useForm<LoginFieldValues>({
     resolver: yupResolver(loginSchema),
     defaultValues: {
-      username: "",
-      password: "",
+      username: "johnd",
+      password: "m38rmF$",
     },
   });
 
   const onSubmit: SubmitHandler<LoginFieldValues> = (values) => {
-    mutation.mutate(values);
+    mutation.mutate(values, {
+      onSuccess() {
+        router.replace(pathnames.DASHBOARD);
+      },
+    });
   };
 
   return (
     <div className="flex items-center mx-auto w-full max-w-md p-10">
       <div className="w-full space-y-6">
         <div className="flex flex-col items-center space-y-4 text-center">
-          <Link href={"/"}>
-            <Image src="/logo.png" width={78} height={50} alt="" />
-          </Link>
+          {/* <Link href={"/"}> */}
+          <Image src="/logo.png" width={78} height={50} alt="" />
+          {/* </Link> */}
           <div className="space-y-1">
             <h2 className="font-medium text-2xl">Welcome to Weasydoo</h2>
             <p className="text-muted-foreground">
@@ -82,7 +90,7 @@ const LoginForm = () => {
                     <FormItem>
                       <FormLabel>Password</FormLabel>
                       <FormControl>
-                        <Input type="password" {...field} />
+                        <InputPassword {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -96,9 +104,9 @@ const LoginForm = () => {
                 <span className="underline cursor-pointer">Sign up</span>
               </p>
 
-              <Link href={"/"} className="text-primary underline text-center">
+              {/* <Link href={"/"} className="text-primary underline text-center">
                 Visit Our Home Page
-              </Link>
+              </Link> */}
             </FormRow>
           </form>
         </Form>

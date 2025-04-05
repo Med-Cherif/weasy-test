@@ -3,7 +3,7 @@ import { LoginRequestBody } from "./auth-types";
 
 const authClient = {
   login(data: LoginRequestBody) {
-    return httpClient.post("/auth/login", data);
+    return httpClient.post("/auth/login", data).then((res) => res.data);
   },
 };
 

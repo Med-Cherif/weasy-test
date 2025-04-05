@@ -1,5 +1,7 @@
 "use client";
 
+import { ToastContainer } from "react-toastify";
+import { ThemeProvider } from "next-themes";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 function makeQueryClient() {
@@ -35,7 +37,10 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
   const queryClient = getQueryClient();
 
   return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider attribute="class">{children}</ThemeProvider>
+      <ToastContainer theme="colored" position="top-right" />
+    </QueryClientProvider>
   );
 };
 

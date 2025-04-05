@@ -1,5 +1,3 @@
-import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 
 const LoginImage = () => {
@@ -11,9 +9,9 @@ const LoginImage = () => {
           Weasydoo ERP Integrator Specialized in Free and Open Source
           Technologies.
         </p>
-        <Link className="text-primary font-medium text-xl underline" href={"/"}>
+        {/* <Link className="text-primary font-medium text-xl underline" href={"/"}>
           Visit Our Home Page
-        </Link>
+        </Link> */}
       </div>
     </div>
   );
